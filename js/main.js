@@ -11,6 +11,9 @@ function show_more_menu(value) {
   x.value = value;
   myFunction();
 }
+function isInt(value) {
+  return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
+}
 function myFunction() {
     var x = document.getElementById("first_name2");
     var y = document.getElementById("submit_button");
@@ -22,11 +25,13 @@ function myFunction() {
       y.disabled = false;
       return 1;
     }
-    if(x.value < 1 || x.value > 99 || !(x.value === parseInt(x.value, 10))){
+
+    if(!isInt(x.value) || x.value < 1 || x.value > 100){
       $("#metaInfo").append("Invalid ID: " + x.value);
       y.disabled = false;
       return 1; 
     }
+    x.value = x.value.replace(/^0+/, '');
     toggle_visibility('loadingMask', 'show');
     $.ajax({url: "http://jsonplaceholder.typicode.com/posts/" + x.value.trim(), success: function(result){
         console.log(result);
