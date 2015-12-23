@@ -13,22 +13,24 @@ function show_more_menu(value) {
 }
 function myFunction() {
     var x = document.getElementById("first_name2");
+    var y = document.getElementById("submit_button");
+
     $("#listOfPeople").empty();
     $("#metaInfo").empty();
-    x.disabled = true;
+    y.disabled = true;
     if(x.value.length < 1){
-      x.disabled = false;
+      y.disabled = false;
       return 1;
     }
     if(x.value < 1 || x.value > 99){
       $("#metaInfo").append("Invalid ID: " + x.value);
-      x.disabled = false;
+      y.disabled = false;
       return 1; 
     }
     toggle_visibility('loadingMask', 'show');
     $.ajax({url: "http://jsonplaceholder.typicode.com/posts/" + x.value.trim(), success: function(result){
         console.log(result);
-	x.disabled = false;
+	y.disabled = false;
         toggle_visibility('loadingMask', 'hide');
 	$("#listOfPeople").empty();
     	$("#metaInfo").empty();
