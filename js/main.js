@@ -22,7 +22,7 @@ function myFunction() {
       y.disabled = false;
       return 1;
     }
-    if(x.value < 1 || x.value > 99){
+    if(x.value < 1 || x.value > 99 || x.value !== parseInt(x.value, 10)){
       $("#metaInfo").append("Invalid ID: " + x.value);
       y.disabled = false;
       return 1; 
